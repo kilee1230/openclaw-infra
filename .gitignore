@@ -1,0 +1,12 @@
+node_modules/
+dist/
+cdk.out/
+.env
+*.pem
+*.key
+*.js
+!cdk.json
+*.d.ts
+.DS_Store
+.pnpm-store/
+.vscode/

@@ -1,0 +1,27 @@
+{
+  "name": "openclaw-infra",
+  "version": "1.0.0",
+  "description": "CDK infrastructure for OpenClaw on AWS EC2 Spot + Cloudflare Tunnel",
+  "scripts": {
+    "build": "tsc",
+    "cdk": "cdk",
+    "synth": "cdk synth",
+    "deploy": "cdk deploy",
+    "destroy": "cdk destroy",
+    "diff": "cdk diff",
+    "diagram": "cdk synth -q && echo 'Diagrams generated in cdk.out/'"
+  },
+  "dependencies": {
+    "@aws/pdk": "^0.26.15",
+    "aws-cdk-lib": "^2.241.0",
+    "constructs": "^10.4.2",
+    "dotenv": "^16.4.7",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "aws-cdk": "^2.241.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}

@@ -1,0 +1,16 @@
+services:
+  openclaw:
+    image: ${OPENCLAW_IMAGE:-ghcr.io/openclaw/openclaw:latest}
+    container_name: openclaw
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${OPENCLAW_PORT:-3000}:${OPENCLAW_PORT:-3000}"
+    volumes:
+      - openclaw-data:/data
+    environment:
+      - PORT=${OPENCLAW_PORT:-3000}
+      - S3_BUCKET=${S3_BUCKET:-}
+      - AWS_REGION=${AWS_REGION:-us-east-1}
+
+volumes:
+  openclaw-data:
