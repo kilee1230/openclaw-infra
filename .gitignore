@@ -10,3 +10,4 @@ cdk.out/
 .DS_Store
 .pnpm-store/
 .vscode/
+cdk.context.json

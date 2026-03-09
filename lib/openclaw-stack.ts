@@ -37,6 +37,13 @@ export class OpenClawStack extends cdk.Stack {
     });
     cdk.Tags.of(sg).add("Name", "openclaw-sg");
 
+    // ── Key Pair (stored in SSM Parameter Store) ───────────────────
+    const keyPair = new ec2.KeyPair(this, "KeyPair", {
+      keyPairName: env.EC2_KEY_PAIR_NAME,
+      type: ec2.KeyPairType.ED25519,
+    });
+    cdk.Tags.of(keyPair).add("Project", "openclaw");
+
     // ── IAM Role ───────────────────────────────────────────────────
     const role = new iam.Role(this, "InstanceRole", {
       assumedBy: new iam.ServicePrincipal("ec2.amazonaws.com"),
@@ -124,7 +131,7 @@ export class OpenClawStack extends cdk.Stack {
       securityGroup: sg,
       role,
       userData,
-      keyName: env.EC2_KEY_PAIR_NAME,
+      keyPair,
       blockDevices: [
         {
           deviceName: "/dev/sda1",
@@ -152,6 +159,8 @@ export class OpenClawStack extends cdk.Stack {
       ],
     });
 
+    instance.addDependency(keyPair.node.defaultChild as cdk.CfnResource);
+
     // ── Outputs ────────────────────────────────────────────────────
     new cdk.CfnOutput(this, "BucketName", {
       value: bucket.bucketName,
@@ -171,6 +180,11 @@ export class OpenClawStack extends cdk.Stack {
     new cdk.CfnOutput(this, "TunnelHostname", {
       value: `https://${env.CLOUDFLARE_TUNNEL_HOSTNAME}`,
       description: "Cloudflare Tunnel URL for OpenClaw",
+    });
+
+    new cdk.CfnOutput(this, "SSHKeySSMParameter", {
+      value: keyPair.privateKey.parameterName,
+      description: "SSM parameter path for the private key (retrieve with: aws ssm get-parameter --name <value> --with-decryption --query Parameter.Value --output text)",
     });
   }
 }
