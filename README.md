@@ -42,14 +42,14 @@ EC2 Spot Instance (no public ports)
 
 ## Cost Estimate (ap-southeast-5 / Malaysia)
 
-| Resource | Monthly |
-|---|---|
-| EC2 Spot `t3.small` (~$0.0075/hr) | ~$4–5 |
-| EBS 20 GB gp3 ($0.0864/GB) | ~$1.73 |
-| S3 (minimal) | ~$0.10 |
-| Data transfer | ~$0–0.50 |
-| Cloudflare Tunnel | Free |
-| **Total** | **~$6–7** |
+| Resource                          | Monthly   |
+| --------------------------------- | --------- |
+| EC2 Spot `t3.small` (~$0.0075/hr) | ~$4–5     |
+| EBS 20 GB gp3 ($0.0864/GB)        | ~$1.73    |
+| S3 (minimal)                      | ~$0.10    |
+| Data transfer                     | ~$0–0.50  |
+| Cloudflare Tunnel                 | Free      |
+| **Total**                         | **~$6–7** |
 
 ## Prerequisites
 
@@ -101,7 +101,7 @@ OPENCLAW_PORT=3000
 2. Navigate to **Networks → Tunnels**
 3. Create a tunnel named `openclaw`
 4. Copy the tunnel token into `CLOUDFLARE_TUNNEL_TOKEN`
-5. Add a public hostname pointing to `http://localhost:3000`
+5. Add a public hostname pointing to `http://localhost:18789`
 
 ### 4. Bootstrap CDK (first time only)
 
@@ -161,14 +161,14 @@ pnpm diagram
 
 This runs `cdk synth` and produces the following files in `cdk.out/`:
 
-| File | Format | Description |
-|---|---|---|
-| `openclaw-compact.svg` | SVG | Compact view — high-level resource relationships |
-| `openclaw-compact.png` | PNG | Same as above, raster format |
-| `openclaw-compact.dot` | DOT | Graphviz source for custom rendering |
-| `openclaw-verbose.svg` | SVG | Verbose view — all constructs and CFN resources |
-| `openclaw-verbose.png` | PNG | Same as above, raster format |
-| `openclaw-verbose.dot` | DOT | Graphviz source |
+| File                   | Format | Description                                      |
+| ---------------------- | ------ | ------------------------------------------------ |
+| `openclaw-compact.svg` | SVG    | Compact view — high-level resource relationships |
+| `openclaw-compact.png` | PNG    | Same as above, raster format                     |
+| `openclaw-compact.dot` | DOT    | Graphviz source for custom rendering             |
+| `openclaw-verbose.svg` | SVG    | Verbose view — all constructs and CFN resources  |
+| `openclaw-verbose.png` | PNG    | Same as above, raster format                     |
+| `openclaw-verbose.dot` | DOT    | Graphviz source                                  |
 
 Both diagrams use a dark theme. The compact preset filters out internal CDK constructs for a clean overview, while the verbose preset shows the full construct tree.
 

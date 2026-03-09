@@ -9,7 +9,9 @@
     "deploy": "cdk deploy --require-approval never",
     "destroy": "cdk destroy",
     "diff": "cdk diff",
-    "diagram": "cdk synth -q && echo 'Diagrams generated in cdk.out/'"
+    "diagram": "cdk synth -q && echo 'Diagrams generated in cdk.out/'",
+    "connect": "bash scripts/connect.sh tunnel",
+    "shell": "bash scripts/connect.sh shell"
   },
   "dependencies": {
     "@aws/pdk": "^0.26.15",

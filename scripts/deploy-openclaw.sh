@@ -2,7 +2,8 @@
 set -euo pipefail
 
 OPENCLAW_IMAGE="${OPENCLAW_IMAGE:-ghcr.io/openclaw/openclaw:latest}"
-OPENCLAW_PORT="${OPENCLAW_PORT:-3000}"
+OPENCLAW_PORT="${OPENCLAW_PORT:-18789}"
+OPENCLAW_INTERNAL_PORT=18789
 S3_BUCKET="${S3_BUCKET:-}"
 AWS_REGION="${AWS_REGION:-us-east-1}"
 
@@ -26,12 +27,10 @@ services:
     image: ${OPENCLAW_IMAGE}
     container_name: openclaw
     restart: unless-stopped
-    ports:
-      - "127.0.0.1:${OPENCLAW_PORT}:${OPENCLAW_PORT}"
+    network_mode: host
     volumes:
       - openclaw-data:/data
     environment:
-      - PORT=${OPENCLAW_PORT}
       - S3_BUCKET=${S3_BUCKET}
       - AWS_REGION=${AWS_REGION}
 ${LLM_ENV_LINES}

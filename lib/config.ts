@@ -22,7 +22,7 @@ const envSchema = z.object({
 
   // OpenClaw
   OPENCLAW_IMAGE: z.string().default("ghcr.io/openclaw/openclaw:latest"),
-  OPENCLAW_PORT: z.coerce.number().int().min(1).max(65535).default(3000),
+  OPENCLAW_PORT: z.coerce.number().int().min(1).max(65535).default(18789),
 
   // LLM Provider API Keys (all optional — configure after deploy if not set)
   OPENAI_API_KEY: z.string().optional(),
